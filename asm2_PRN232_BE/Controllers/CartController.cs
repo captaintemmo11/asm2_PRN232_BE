@@ -1,11 +1,11 @@
-﻿using Asm2_PRN232_BE.Data;
-using Asm2_PRN232_BE.Models;
+﻿using asm2_PRN232_BE.Data;
+using  asm2_PRN232_BE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace Asm2_PRN232_BE.DTOs
+namespace asm2_PRN232_BE.DTOs
 {
     [Route("api/[controller]")]
     [ApiController]

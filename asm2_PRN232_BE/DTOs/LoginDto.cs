@@ -1,4 +1,4 @@
-﻿namespace Asm2_PRN232_BE.DTOs
+﻿namespace asm2_PRN232_BE.DTOs
 {
     public class LoginDto
     {

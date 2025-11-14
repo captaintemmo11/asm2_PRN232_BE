@@ -1,4 +1,4 @@
-﻿namespace Asm2_PRN232_BE.Models
+﻿namespace asm2_PRN232_BE.Models
 {
     public class User
     {

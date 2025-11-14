@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # copy csproj và restore
-COPY Asm2_PRN232_BE.csproj ./
-RUN dotnet restore Asm2_PRN232_BE.csproj
+COPY asm2_PRN232_BE.csproj ./
+RUN dotnet restore asm2_PRN232_BE.csproj
 
 # copy toàn bộ source và build
 COPY . .

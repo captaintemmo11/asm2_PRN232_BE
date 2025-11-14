@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Asm2_PRN232_BE.Migrations
+namespace asm2_PRN232_BE.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
