@@ -6,40 +6,33 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// -----------------------------------------------------
-// ✅ 1️⃣ Logging - hiển thị log trong Render Dashboard
-// -----------------------------------------------------
+// =====================================
+// LOAD ENV FIRST (Render cần điều này)
+// =====================================
+builder.Configuration.AddEnvironmentVariables();
+
+// Logging
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 
-// -----------------------------------------------------
-// ✅ 2️⃣ Add Services
-// -----------------------------------------------------
+// Services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// -----------------------------------------------------
-// ✅ 3️⃣ Database Configuration (PostgreSQL - Render NeonDB)
-// -----------------------------------------------------
+// PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection"))
+);
 
-// -----------------------------------------------------
-// ✅ 4️⃣ JWT Authentication Config
-// -----------------------------------------------------
+// JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         var jwtKey = builder.Configuration["Jwt:Key"];
         var jwtIssuer = builder.Configuration["Jwt:Issuer"];
         var jwtAudience = builder.Configuration["Jwt:Audience"];
-
-        if (string.IsNullOrEmpty(jwtKey))
-        {
-            Console.WriteLine("[JWT CONFIG WARNING] Jwt:Key is missing!");
-        }
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -53,21 +46,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// -----------------------------------------------------
-// ✅ 5️⃣ Environment Variables (Render sẽ map tự động)
-// -----------------------------------------------------
-builder.Configuration.AddEnvironmentVariables();
-
-// -----------------------------------------------------
-// ✅ 6️⃣ CORS - Cho phép Vercel + Localhost gọi API
-// -----------------------------------------------------
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
         policy.WithOrigins(
-            "https://asmprn.vercel.app", // FE deploy Vercel
-            "http://localhost:3000"      // FE dev local
+            "https://asmprn.vercel.app",
+            "http://localhost:3000"
         )
         .AllowAnyHeader()
         .AllowAnyMethod()
@@ -75,33 +61,29 @@ builder.Services.AddCors(options =>
     });
 });
 
-// -----------------------------------------------------
-// ✅ 7️⃣ Build App
-// -----------------------------------------------------
 var app = builder.Build();
 
-// -----------------------------------------------------
-// ✅ 8️⃣ Middleware Pipeline
-// -----------------------------------------------------
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// ❗ Disable HTTPS redirection in Render production
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
-// Quan trọng: đặt CORS trước Authentication
 app.UseCors("AllowSpecificOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Route test nhanh API
 app.MapGet("/", () => Results.Ok(new
 {
     status = "ok",
-    message = "🚀 API is running on Render successfully",
+    message = "🚀 API running on Render",
     environment = app.Environment.EnvironmentName
 }));
 
