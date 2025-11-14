@@ -1,6 +1,6 @@
-﻿using ASMPRN232.Data;
-using ASMPRN232.Models;
-using ASMPRN232.DTOs;
+﻿using Asm2_PRN232_BE.Data;
+using Asm2_PRN232_BE.Models;
+using Asm2_PRN232_BE.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace ASMPRN232.Controllers
+namespace Asm2_PRN232_BE.Controllers
 {
     [ApiController]
     [Route("api/auth")]

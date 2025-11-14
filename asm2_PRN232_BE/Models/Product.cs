@@ -1,4 +1,4 @@
-﻿namespace ASMPRN232.Models
+﻿namespace Asm2_PRN232_BE.Models
 {
     public class Product
     {

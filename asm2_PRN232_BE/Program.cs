@@ -1,4 +1,4 @@
-﻿using ASMPRN232.Data;
+﻿using Asm2_PRN232_BE.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

@@ -1,4 +1,4 @@
-﻿namespace ASMPRN232.DTOs
+﻿namespace Asm2_PRN232_BE.DTOs
 {
     // DTOs cho Cart
     public class AddToCartDto

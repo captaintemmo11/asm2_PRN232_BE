@@ -1,7 +1,7 @@
-﻿using ASMPRN232.Models;
+﻿using Asm2_PRN232_BE.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ASMPRN232.Data
+namespace Asm2_PRN232_BE.Data
 {
     public class AppDbContext : DbContext
     {

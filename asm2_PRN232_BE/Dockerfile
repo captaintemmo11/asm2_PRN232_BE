@@ -3,8 +3,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # copy csproj và restore
-COPY ASMPRN232.csproj ./
-RUN dotnet restore ASMPRN232.csproj
+COPY Asm2_PRN232_BE.csproj ./
+RUN dotnet restore Asm2_PRN232_BE.csproj
 
 # copy toàn bộ source và build
 COPY . .
@@ -16,4 +16,4 @@ WORKDIR /app
 COPY --from=build /app/publish .
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
-ENTRYPOINT ["dotnet", "ASMPRN232.dll"]
+ENTRYPOINT ["dotnet", "Asm2_PRN232_BE.dll"]
